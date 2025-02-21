@@ -1,4 +1,4 @@
-# FireBreak Risk  API Specifications
+# FireBreak Risk API Specifications
 
 ## Overview
 
