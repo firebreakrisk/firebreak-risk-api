@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FireBreak Mitigation</title>
+    <style>
+        :root {
+            --primary: #FF6B35;
+            --secondary: #2F4858;
+            --accent: #4CAF50;
+            --warning: #FFC107;
+            --light: #F5F5F5;
+            --dark: #333333;
+            --spacing: 1rem;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--light);
+            padding: var(--spacing);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: calc(var(--spacing) * 2);
+        }
+
+        h1, h2, h3 {
+            color: var(--secondary);
+            margin-bottom: var(--spacing);
+        }
+
+        .address {
+            font-style: italic;
+            color: var(--secondary);
+            margin-bottom: calc(var(--spacing) * 2);
+        }
+
+        .important-notes {
+            background: var(--light);
+            padding: var(--spacing);
+            border-radius: 4px;
+            margin-bottom: calc(var(--spacing) * 2);
+        }
+
+        .important-notes ul {
+            list-style: none;
+            padding-left: var(--spacing);
+        }
+
+        .important-notes li {
+            margin-bottom: calc(var(--spacing) / 2);
+            position: relative;
+        }
+
+        .important-notes li::before {
+            content: "✅";
+            position: absolute;
+            left: -1.5rem;
+        }
+
+        .action-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: calc(var(--spacing) * 2);
+            margin-bottom: calc(var(--spacing) * 2);
+        }
+
+        .photo-placeholder {
+            background: #eee;
+            height: 200px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--spacing);
+        }
+
+        .section {
+            margin-bottom: var(--spacing);
+        }
+
+        .section h3 {
+            font-size: 1.1rem;
+            margin-bottom: calc(var(--spacing) / 2);
+        }
+
+        .button-group {
+            display: flex;
+            gap: var(--spacing);
+            margin-top: calc(var(--spacing) * 2);
+        }
+
+        button {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: var(--light);
+            color: var(--secondary);
+        }
+
+        .btn-primary:hover {
+            background: #45a049;
+        }
+
+        .btn-secondary:hover {
+            background: #e9e9e9;
+        }
+
+        .actions-summary {
+            margin-top: calc(var(--spacing) * 2);
+        }
+
+        .actions-summary ul {
+            list-style: none;
+            padding-left: var(--spacing);
+        }
+
+        .actions-summary li {
+            margin-bottom: calc(var(--spacing) / 2);
+        }
+
+        .sharing-section {
+            border-top: 1px solid #ddd;
+            margin-top: calc(var(--spacing) * 2);
+            padding-top: calc(var(--spacing) * 2);
+        }
+
+        .sharing-buttons {
+            display: flex;
+            gap: var(--spacing);
+            margin-top: var(--spacing);
+        }
+
+        .sharing-note {
+            font-size: 0.9rem;
+            color: var(--secondary);
+            font-style: italic;
+            margin-top: calc(var(--spacing) / 2);
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #ddd;
+            margin: calc(var(--spacing) * 2) 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>FireBreak Mitigation Recommendations</h1>
+        <div class="address">123 Forest Lane, Woodland Hills</div>
+
+        <section class="important-notes">
+            <h2>Important Notes</h2>
+            <ul>
+                <li>We use AI to identify objects in photos. If the AI made a mistake, tap "Flag for Review"</li>
+                <li>This report prioritizes actions that are DIY and free or low-cost. They do not include all possible mitigations.</li>
+                <li>Your home might still burn even if you mitigate.</li>
+            </ul>
+        </section>
+
+        <section class="action-card">
+            <h2>Action: Clear Under-Deck</h2>
+            <div class="photo-placeholder">
+                <img src="/api/placeholder/400/200" alt="Under deck area photo" />
+            </div>
+
+            <div class="section">
+                <h3>What we see:</h3>
+                <p>Combustible materials <strong>under deck</strong></p>
+            </div>
+
+            <div class="section">
+                <h3>Why it matters:</h3>
+                <p>Combustibles next to house <strong>ignite from embers</strong>, can <strong>spread fire</strong></p>
+            </div>
+
+            <div class="section">
+                <h3>What to do:</h3>
+                <p><strong>Remove all combustibles from under deck</strong></p>
+            </div>
+
+            <div class="button-group">
+                <button class="btn-primary">✅ Yes, I can do this</button>
+                <button class="btn-secondary">➡ Show me next action</button>
+            </div>
+        </section>
+
+        <section class="actions-summary">
+            <h2>Here are your actions:</h2>
+            <ul>
+                <li>Clear under deck</li>
+                <li>Clear gutters</li>
+                <li>Remove dead vegetation</li>
+            </ul>
+            <p>You'll be able to <strong>re-inspect</strong> to prove what you've done. ✅</p>
+        </section>
+
+        <section class="sharing-section">
+            <h2>Insurance & Sharing</h2>
+            <p>We help you get <strong>better insurance</strong> for doing mitigation.</p>
+            <p>May we share what actions you've taken?</p>
+            <p class="sharing-note">(We never share photos.)</p>
+            
+            <div class="sharing-buttons">
+                <button class="btn-primary">✅ Yes</button>
+                <button class="btn-secondary">❌ No</button>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
