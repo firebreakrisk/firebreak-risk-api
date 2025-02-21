@@ -1,0 +1,20 @@
+# .github/workflows/validate-specs.yml
+name: Validate OpenAPI Specs
+
+on:
+  push:
+    paths:
+      - 'specs/swagger/**'
+  pull_request:
+    paths:
+      - 'specs/swagger/**'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Validate OpenAPI definition
+        uses: char0n/swagger-editor-validate@v1
+        with:
+          definition-file: specs/swagger/photo-analysis-ingest.yaml
