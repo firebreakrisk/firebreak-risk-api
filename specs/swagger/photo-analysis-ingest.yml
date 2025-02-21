@@ -1,0 +1,105 @@
+openapi: 3.0.0
+info:
+  title: FireBreak Risk Photo Analysis Ingest API
+  version: '1.0.0'
+  description: API for ingesting photo analysis results for wildfire risk assessment
+servers:
+  - url: https://api.firebreakrisk.com/scoring/v1
+    description: Production server
+
+paths:
+  /analysis/photo-results:
+    post:
+      summary: Ingest multiple photo analysis results
+      description: Accepts analysis results from multiple property photos for risk assessment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PhotoAnalysisResults'
+      responses:
+        '201':
+          description: Analysis results successfully ingested
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  batchId:
+                    type: string
+                    description: Unique identifier for this batch of results
+                  status:
+                    type: string
+                    enum: [PROCESSING, COMPLETED, FAILED]
+                  timestamp:
+                    type: string
+                    format: date-time
+        '400':
+          description: Invalid input
+        '500':
+          description: Internal server error
+
+components:
+  schemas:
+    PhotoAnalysisResults:
+      type: object
+      required:
+        - propertyId
+        - analysisDate
+        - photoResults
+      properties:
+        propertyId:
+          type: string
+          description: Unique identifier for the property
+        analysisDate:
+          type: string
+          format: date-time
+        photoResults:
+          type: array
+          items:
+            $ref: '#/components/schemas/PhotoResult'
+          minItems: 1
+    
+    PhotoResult:
+      type: object
+      required:
+        - photoId
+        - category
+        - detections
+      properties:
+        photoId:
+          type: string
+          description: Unique identifier for the photo
+        category:
+          type: string
+          enum: [HOME_HARDENING, EMBER_ZONE]
+          description: Primary category of analysis
+        section:
+          type: string
+          description: Specific section being analyzed (e.g., ROOF_LITTER, VENTS, etc.)
+        detections:
+          type: array
+          items:
+            $ref: '#/components/schemas/Detection'
+
+    Detection:
+      type: object
+      required:
+        - code
+        - confidence
+      properties:
+        code:
+          type: string
+          description: Mitigation code (e.g., RC1, RB1, etc.)
+        confidence:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 1
+          description: Confidence score of the detection
+        observations:
+          type: array
+          items:
+            type: string
+          description: Additional observations from the analysis
