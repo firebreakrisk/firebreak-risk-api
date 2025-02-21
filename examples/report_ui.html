@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wildfire Readiness Report</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --good-color: #71B956;
+            --better-color: #D63B3B;
+            --best-color: #D63B3B;
+            --navy-blue: #1a2b66;
+            --green-grade: #71B956;
+            --orange-grade: #E67234;
+            --red-grade: #D63B3B;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            background-color: var(--navy-blue);
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        .header {
+            background-color: var(--navy-blue);
+            color: white;
+        }
+
+        .address-bar {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 20px;
+            font-size: 14px;
+            background-color: var(--navy-blue);
+            color: white;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .content {
+            padding: 20px;
+            background-color: var(--navy-blue);
+            color: white;
+        }
+
+        .address {
+            font-size: 14px;
+            margin-bottom: 20px;
+            color: white;
+            text-align: right;
+        }
+
+        h1 {
+            font-size: 32px;
+            margin: 0 0 20px 0;
+        }
+
+        .grade {
+            float: right;
+            font-size: 36px;
+            font-weight: bold;
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .category {
+            margin-bottom: 15px;
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        .category-name {
+            flex-grow: 1;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        .category-grade {
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background-color: #ffffff33;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 6px;
+            transition: width 0.3s ease;
+        }
+
+        .progress-fill.grade-a {
+            background-color: var(--green-grade);
+            width: 90%;
+        }
+
+        .progress-fill.grade-b-plus {
+            background-color: var(--green-grade);
+            width: 85%;
+        }
+
+        .progress-fill.grade-b-minus {
+            background-color: var(--orange-grade);
+            width: 75%;
+        }
+
+        .progress-fill.grade-c {
+            background-color: var(--orange-grade);
+            width: 65%;
+        }
+
+        .progress-fill.grade-d {
+            background-color: var(--red-grade);
+            width: 25%;
+        }
+
+        .icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            color: white;
+        }
+
+        .powered-by {
+            text-align: right;
+            padding: 10px 20px;
+            font-size: 12px;
+            color: #666;
+        }
+
+        /* Plants Detail Section Styles */
+        .plants-detail {
+            background-color: white;
+            border-radius: 8px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+
+        .plants-header {
+            background-color: var(--navy-blue);
+            color: white;
+            padding: 20px;
+        }
+
+        .plants-header-top {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .plants-header .icon {
+            font-size: 24px;
+        }
+
+        .plants-header h2 {
+            margin: 0;
+            font-size: 24px;
+            flex-grow: 1;
+        }
+
+        .plants-header .grade {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .plants-progress {
+            height: 12px;
+            background-color: #ffffff33;
+            border-radius: 6px;
+            overflow: hidden;
+            margin-left: 39px;
+        }
+
+        .plants-progress .progress-fill {
+            height: 100%;
+            background-color: var(--green-grade);
+            width: 85%;
+        }
+
+        .plants-description {
+            background-color: #1a3163;
+            color: white;
+            padding: 20px;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .improvement-section {
+            padding: 20px;
+        }
+
+        .improvement-section h3 {
+            color: var(--navy-blue);
+            margin: 0 0 20px 0;
+            font-size: 18px;
+            text-transform: uppercase;
+        }
+
+        .improvement-level {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+        }
+
+        .status-icon {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .status-icon.good {
+            background-color: var(--good-color);
+        }
+
+        .status-icon.better, .status-icon.best {
+            background-color: var(--better-color);
+        }
+
+        .improvement-content h4 {
+            color: var(--navy-blue);
+            margin: 0 0 8px 0;
+            font-size: 16px;
+            text-transform: uppercase;
+        }
+
+        .improvement-content p {
+            margin: 0;
+            color: #333;
+            line-height: 1.5;
+        }
+
+        .images-section {
+            padding: 0 20px 20px;
+        }
+
+        .images-section h3 {
+            color: var(--navy-blue);
+            margin: 0 0 15px 0;
+            font-size: 18px;
+            text-transform: uppercase;
+        }
+
+        .property-image {
+            width: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .property-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        @media (max-width: 600px) {
+            .content {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .grade {
+                font-size: 28px;
+            }
+
+            .section-title {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="address-bar">
+                <span class="location">10535 Washoe Road, Truckee CA 96161</span>
+                <span class="date">Aug 18, 2023</span>
+            </div>
+            <img src="/api/placeholder/800/300" alt="House exterior with wooden deck" class="hero-image">
+        </div>
+        <div class="content">
+
+            <h1>Ready for Wildfire: <span class="grade">C</span></h1>
+
+            <div class="section">
+                <div class="section-title">HOME HARDENING</div>
+                
+                <div class="category">
+                    <div class="category-header">
+                        <i class="icon fas fa-tools"></i>
+                        <span class="category-name">CONSTRUCTION</span>
+                        <span class="category-grade">D</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill grade-d"></div>
+                    </div>
+                </div>
+
+                <div class="category">
+                    <div class="category-header">
+                        <i class="icon fas fa-home"></i>
+                        <span class="category-name">ROOF</span>
+                        <span class="category-grade">B+</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill grade-b-plus"></div>
+                    </div>
+                </div>
+
+                <div class="category">
+                    <div class="category-header">
+                        <i class="icon fas fa-building"></i>
+                        <span class="category-name">STRUCTURES</span>
+                        <span class="category-grade">B+</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill grade-b-plus"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">EMBER ZONE</div>
+                
+                <div class="category">
+                    <div class="category-header">
+                        <i class="icon fas fa-fire"></i>
+                        <span class="category-name">FUEL</span>
+                        <span class="category-grade">C</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill grade-c"></div>
+                    </div>
+                </div>
+
+                <div class="category">
+                    <div class="category-header">
+                        <i class="icon fas fa-tree"></i>
+                        <span class="category-name">TREES</span>
+                        <span class="category-grade">B-</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill grade-b-minus"></div>
+                    </div>
+                </div>
+
+                <div class="category">
+                    <div class="category-header">
+                        <i class="icon fas fa-seedling"></i>
+                        <span class="category-name">PLANTS</span>
+                        <span class="category-grade">B+</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill grade-b-plus"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="powered-by">powered by FireBreak</div>
+
+        <div class="plants-detail">
+            <div class="plants-header">
+                <div class="plants-header-top">
+                    <i class="icon fas fa-seedling"></i>
+                    <h2>PLANTS</h2>
+                    <span class="grade">B+</span>
+                </div>
+                <div class="plants-progress">
+                    <div class="progress-fill"></div>
+                </div>
+            </div>
+
+            <div class="plants-description">
+                The 30' space around your home can be used as a buffer for your property to reduce potential fuel for fire.
+            </div>
+
+            <div class="improvement-section">
+                <h3>HOW TO IMPROVE</h3>
+
+                <div class="improvement-level">
+                    <div class="status-icon good">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <div class="improvement-content">
+                        <h4>GOOD</h4>
+                        <p>The amount of vegetation around the home is reduced by the increase of space between the vegetation with non-combustible materials or having placed the plants into individual non-combustible pots/planters.</p>
+                    </div>
+                </div>
+
+                <div class="improvement-level">
+                    <div class="status-icon better">
+                        <i class="fas fa-times"></i>
+                    </div>
+                    <div class="improvement-content">
+                        <h4>BETTER</h4>
+                        <p>All vegetation and items that could ignite are removed from the area around the home as well as under decks, windows, balconies and stairs.</p>
+                    </div>
+                </div>
+
+                <div class="improvement-level">
+                    <div class="status-icon best">
+                        <i class="fas fa-times"></i>
+                    </div>
+                    <div class="improvement-content">
+                        <h4>BEST</h4>
+                        <p>Hazardous vegetation is replaced with less flammable plants. An irrigated, well-maintained yard is more effective than a dense collection of flammable shrubs.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="images-section">
+                <h3>IMAGES</h3>
+                <div class="property-image">
+                    <img src="/api/placeholder/800/600" alt="Property vegetation assessment">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
