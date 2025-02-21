@@ -14,8 +14,8 @@ This repository contains the open source specifications for the FireBreak Risk A
   - `api-usage.md` - General API usage guidelines
 - `/examples/` - Example implementations and code samples
 - `/schemas/` - data dictionaries and JSON schemas for data validation
-  - [Wildfire Standards](../firebreak-risk-api/schemas/wildfire-standards.html) 
-  - [Mitigation Data Dictionary](../firebreak-risk-api/schemas/mitigation_data_dictionary.html) 
+  - [Wildfire Standards](schemas/wildfire-standards.html) 
+  - [Mitigation Data Dictionary](schemas/mitigation_data_dictionary.html) 
 ## Purpose
 
 This open source initiative aims to:
