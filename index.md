@@ -34,7 +34,7 @@ This open source initiative aims to:
 
 ### Quick Start
 1. Review the data dictionary at Mitigation Data Dictionary](../firebreak-risk-api/schemas/mitigation_data_dictionary.html)
-2. Review the Wildfire Standards Comparison at[Wildfire Standards](../firebreak-risk-api/schemas/wildfire-standards.html) and [Mitigation Data Dictionary](../firebreak-risk-api/schemas/mitigation_data_dictionary.html) 
+2. Review the Wildfire Standards Comparison at [Wildfire Standards](../firebreak-risk-api/schemas/wildfire-standards.html) and [Mitigation Data Dictionary](../firebreak-risk-api/schemas/mitigation_data_dictionary.html) 
 3. Review the  API specifications in the `/specs/swagger/` directory
 4. Check out the example implementations in `/examples/` [Report UI](../firebreak-risk-api/examples/report_ui.html) and [Mitigation Recommendations UI](../firebreak-risk-api/examples/mitigation_recommendations_ui.html) 
 5. Read through the documentation in `/docs/`
