@@ -1,0 +1,141 @@
+openapi: 3.0.0
+info:
+  title: FireBreak Risk Mitigation Scoring API - Output
+  version: '1.0.0'
+  description: API for retrieving wildfire risk mitigation scores and recommendations
+servers:
+  - url: https://api.firebreakrisk.com/scoring/v1
+    description: Production server
+
+paths:
+  /mitigation/score:
+    get:
+      summary: Retrieve mitigation scores for a property
+      description: Returns detailed mitigation scores and recommendations based on property characteristics
+      parameters:
+        - name: propertyId
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Unique identifier for the property
+        - name: assessmentDate
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date
+          description: Date of the assessment
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MitigationScore'
+        '400':
+          description: Bad request
+        '404':
+          description: Property not found
+        '500':
+          description: Internal server error
+
+  /mitigation/recommendations:
+    get:
+      summary: Retrieve detailed mitigation recommendations
+      description: Returns specific mitigation recommendations based on property assessment
+      parameters:
+        - name: scoreId
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Score identifier from a previous assessment
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MitigationRecommendations'
+        '400':
+          description: Bad request
+        '404':
+          description: Score ID not found
+        '500':
+          description: Internal server error
+
+components:
+  schemas:
+    MitigationScore:
+      type: object
+      required:
+        - scoreId
+        - propertyId
+        - assessmentDate
+        - overallScore
+        - categoryScores
+      properties:
+        scoreId:
+          type: string
+          description: Unique identifier for this score assessment
+        propertyId:
+          type: string
+          description: Property identifier
+        assessmentDate:
+          type: string
+          format: date
+          description: Date of assessment
+        overallScore:
+          type: number
+          format: float
+          description: Overall mitigation score (0-100)
+        categoryScores:
+          type: object
+          properties:
+            vegetationManagement:
+              type: number
+              description: Score for vegetation management (0-100)
+            structuralVulnerability:
+              type: number
+              description: Score for structural vulnerability (0-100)
+            accessAndEgress:
+              type: number
+              description: Score for access and egress (0-100)
+            waterAvailability:
+              type: number
+              description: Score for water availability (0-100)
+        riskLevel:
+          type: string
+          enum: [LOW, MODERATE, HIGH, EXTREME]
+          description: Overall risk level assessment
+
+    MitigationRecommendations:
+      type: object
+      required:
+        - scoreId
+        - recommendations
+      properties:
+        scoreId:
+          type: string
+          description: Reference to the score assessment
+        recommendations:
+          type: array
+          items:
+            type: object
+            properties:
+              category:
+                type: string
+                description: Category of the recommendation
+              priority:
+                type: string
+                enum: [CRITICAL, HIGH, MODERATE, LOW]
+              description:
+                type: string
+                description: Detailed description of the recommendation
+              estimatedCost:
+                type: string
+                description: Estimated cost range for implementation
+              timeframe:
+                type: string
+                description: Recommended timeframe for implementation
