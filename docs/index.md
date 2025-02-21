@@ -13,8 +13,9 @@ This repository contains the open source specifications for the FireBreak Risk A
   - `scoring-function.md` - Documentation for the risk scoring algorithm
   - `api-usage.md` - General API usage guidelines
 - `/examples/` - Example implementations and code samples
-- `/schemas/` - JSON schemas for data validation
-
+- `/schemas/` - Data dictionaries and JSON schemas for data validation
+  - [Wildfire Standards](../schemas/wildfire-standards.html) 
+  - [Mitigation Data Dictionary](../schemas/mitigation_data_dictionary.html) 
 ## Purpose
 
 This open source initiative aims to:
