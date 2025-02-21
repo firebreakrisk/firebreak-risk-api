@@ -1,0 +1,115 @@
+openapi: 3.0.0
+info:
+  title: FireBreak Risk Scoring API
+  version: '1.0.0'
+  description: API for retrieving wildfire risk assessment scores
+servers:
+  - url: https://api.firebreakrisk.com/scoring/v1
+    description: Production server
+
+paths:
+  /scores/{propertyId}:
+    get:
+      summary: Retrieve property risk scores
+      description: Returns comprehensive risk scores for a specific property
+      parameters:
+        - name: propertyId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unique identifier for the property
+        - name: assessmentDate
+          in: query
+          schema:
+            type: string
+            format: date
+          description: Optional specific assessment date
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RiskAssessment'
+        '404':
+          description: Property not found
+        '500':
+          description: Internal server error
+
+components:
+  schemas:
+    RiskAssessment:
+      type: object
+      required:
+        - propertyId
+        - assessmentDate
+        - overallScore
+        - categoryScores
+      properties:
+        propertyId:
+          type: string
+        assessmentDate:
+          type: string
+          format: date-time
+        overallScore:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 100
+        riskLevel:
+          type: string
+          enum: [LOW, MODERATE, HIGH, EXTREME]
+        categoryScores:
+          type: object
+          properties:
+            homeHardening:
+              $ref: '#/components/schemas/CategoryScore'
+            emberZone:
+              $ref: '#/components/schemas/CategoryScore'
+        sectionScores:
+          type: array
+          items:
+            $ref: '#/components/schemas/SectionScore'
+
+    CategoryScore:
+      type: object
+      required:
+        - score
+        - weight
+      properties:
+        score:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 100
+        weight:
+          type: number
+          format: float
+        riskLevel:
+          type: string
+          enum: [LOW, MODERATE, HIGH, EXTREME]
+
+    SectionScore:
+      type: object
+      required:
+        - section
+        - code
+        - score
+      properties:
+        section:
+          type: string
+        code:
+          type: string
+        score:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 3
+        mitigation:
+          type: string
+        confidence:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 1
