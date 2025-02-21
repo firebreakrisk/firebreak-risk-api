@@ -1,0 +1,9 @@
+# .github/ISSUE_TEMPLATE/bug_report.yml
+name: Bug Report
+description: File a bug report
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+  # Add more fields as needed
