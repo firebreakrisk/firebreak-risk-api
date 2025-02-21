@@ -67,7 +67,7 @@ If you use these specifications in your research or projects, please cite:
 ```bibtex
 @misc{firebreak-risk-api,
   title = {FireBreak Risk API Specifications},
-  year = {2024},
+  year = {2025},
   publisher = {GitHub},
   journal = {GitHub repository},
   howpublished = {\url{https://github.com/firebreak/risk-api-specs}}
