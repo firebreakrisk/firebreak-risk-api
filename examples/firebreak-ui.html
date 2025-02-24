@@ -80,12 +80,19 @@
         }
 
         .photo-placeholder {
-            background: #eee;
-            height: 200px;
             border-radius: 4px;
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden; /* Prevent image overflow */
+        }
+        
+        .photo-placeholder img {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+            display: block; /* Remove any default inline spacing */
+            margin-top: var(--spacing);
             margin-bottom: var(--spacing);
         }
 

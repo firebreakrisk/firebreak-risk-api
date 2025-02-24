@@ -80,12 +80,19 @@
         }
 
         .photo-placeholder {
-            background: #eee;
-            height: 200px;
             border-radius: 4px;
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden; /* Prevent image overflow */
+        }
+        
+        .photo-placeholder img {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+            display: block; /* Remove any default inline spacing */
+            margin-top: var(--spacing);
             margin-bottom: var(--spacing);
         }
 
@@ -187,7 +194,7 @@
         <section class="action-card">
             <h2>Action: Clear Under-Deck</h2>
             <div class="photo-placeholder">
-                <img src="/api/placeholder/400/200" alt="Under deck area photo" />
+                <img src="images/a038de135ae9a6cadc846511297571d0-cc_ft_1536.jpg" alt="Under deck area photo" />
             </div>
 
             <div class="section">
