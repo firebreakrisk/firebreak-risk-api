@@ -70,6 +70,6 @@ If you use these specifications in your research or projects, please cite:
   year = {2025},
   publisher = {GitHub},
   journal = {GitHub repository},
-  howpublished = {\url{https://github.com/firebreak/risk-api-specs}}
+  howpublished = {\url{https://github.com/firebreakrisk/firebreak-risk-api}}
 }
 ```
