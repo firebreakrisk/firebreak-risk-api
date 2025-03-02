@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FireBreak Risk Assessment</title>
+    <link href="https://unpkg.com/feather-icons/dist/feather.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4a90e2;
+            --danger: #e53e3e;
+            --warning: #f6ad55;
+            --success: #48bb78;
+            --gray: #718096;
+            --spacing: 1rem;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, system-ui, sans-serif;
+            line-height: 1.5;
+            color: #2d3748;
+            background: #f7fafc;
+            padding: 1rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .risk-indicator {
+            height: 4px;
+            background: var(--danger);
+            margin-bottom: 1.5rem;
+        }
+
+        .header {
+            padding: 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .category-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: #fed7d7;
+            color: #c53030;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+
+        .confidence-bar {
+            background: #edf2f7;
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .confidence-fill {
+            height: 100%;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .risk-level {
+            background: #f7fafc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem;
+        }
+
+        .progress-dots {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .dot {
+            width: 25%;
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 4px;
+        }
+
+        .dot.active {
+            background: var(--danger);
+        }
+
+        .features-list {
+            padding: 1.5rem;
+        }
+
+        .feature-item {
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .recommendations {
+            padding: 1.5rem;
+        }
+
+        .recommendation-item {
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            cursor: pointer;
+        }
+
+        .recommendation-header {
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .recommendation-content {
+            padding: 1rem;
+            border-top: 1px solid #e2e8f0;
+            background: #f7fafc;
+            display: none;
+        }
+
+        .recommendation-content.active {
+            display: block;
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                border-radius: 0;
+            }
+            
+            .header {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="risk-indicator"></div>
+        
+        <div class="header">
+            <div class="category-badge">
+                <i data-feather="shield"></i>
+                Fencing Assessment
+            </div>
+            <div class="confidence-wrapper">
+                <span>Confidence</span>
+                <div class="confidence-bar">
+                    <div class="confidence-fill" style="width: 90%"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="risk-level">
+            <h3>Risk Assessment</h3>
+            <div class="progress-dots">
+                <div class="dot active"></div>
+                <div class="dot active"></div>
+                <div class="dot active"></div>
+                <div class="dot active"></div>
+            </div>
+            <p class="risk-description">Current risk level indicates immediate attention required</p>
+        </div>
+
+        <div class="features-list">
+            <h3>Detected Features</h3>
+            <div class="feature-item">
+                <div class="feature-header">
+                    <i data-feather="alert-triangle"></i>
+                    <span>Wooden fence attached to the home</span>
+                </div>
+                <div class="confidence-bar">
+                    <div class="confidence-fill" style="width: 85%"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="recommendations">
+            <h3>Recommended Actions</h3>
+            <div class="recommendation-items">
+                <!-- Recommendations will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script>
+        // Assessment data
+        const assessment = {
+            recommendations: [
+                "Install a non-combustible fence transition within 5' of the home",
+                "Apply a fire-resistant coating or replace wooden panels"
+            ]
+        };
+
+        // Initialize Feather icons
+        feather.replace();
+
+        // Populate recommendations
+        const recommendationsContainer = document.querySelector('.recommendation-items');
+        assessment.recommendations.forEach((rec, index) => {
+            const item = document.createElement('div');
+            item.className = 'recommendation-item';
+            item.innerHTML = `
+                <div class="recommendation-header">
+                    <span>${rec}</span>
+                    <i data-feather="chevron-down"></i>
+                </div>
+                <div class="recommendation-content">
+                    <div class="priority-badge">High Priority</div>
+                </div>
+            `;
+            
+            item.querySelector('.recommendation-header').addEventListener('click', () => {
+                const content = item.querySelector('.recommendation-content');
+                content.classList.toggle('active');
+                const icon = item.querySelector('svg');
+                icon.style.transform = content.classList.contains('active') 
+                    ? 'rotate(180deg)' 
+                    : 'rotate(0deg)';
+            });
+            
+            recommendationsContainer.appendChild(item);
+        });
+
+        // Re-run Feather icons for dynamically added content
+        feather.replace();
+    </script>
+</body>
+</html>
